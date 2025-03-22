@@ -1,0 +1,143 @@
+[
+    {
+      "title": "What is the best way to learn C++?",
+      "content": "I'm new to C++. What are the best resources to start learning?",
+      "author": "BeginnerCoder",
+      "upvotes": 15,
+      "downvotes": 2
+    },
+    {
+      "title": "Pointers vs References",
+      "content": "Can someone explain the difference between pointers and references in C++?",
+      "author": "CodeMaster",
+      "upvotes": 25,
+      "downvotes": 3
+    },
+    {
+      "title": "How to manage memory in C++?",
+      "content": "What are some best practices for memory management in C++?",
+      "author": "MemoryGuru",
+      "upvotes": 30,
+      "downvotes": 1
+    },
+    {
+      "title": "Best C++ IDEs",
+      "content": "Which IDE do you prefer for C++ development and why?",
+      "author": "DevToolEnthusiast",
+      "upvotes": 20,
+      "downvotes": 4
+    },
+    {
+      "title": "How does C++ handle multithreading?",
+      "content": "What are the best ways to implement multithreading in C++?",
+      "author": "ThreadMaster",
+      "upvotes": 18,
+      "downvotes": 5
+    },
+    {
+      "title": "What is the difference between struct and class?",
+      "content": "When should I use struct instead of class in C++?",
+      "author": "OOPFan",
+      "upvotes": 22,
+      "downvotes": 2
+    },
+    {
+      "title": "STL Containers",
+      "content": "Which STL container should I use for my project?",
+      "author": "STLGeek",
+      "upvotes": 16,
+      "downvotes": 3
+    },
+    {
+      "title": "C++ vs Python Performance",
+      "content": "How does C++ compare to Python in terms of speed and efficiency?",
+      "author": "Speedster",
+      "upvotes": 19,
+      "downvotes": 4
+    },
+    {
+      "title": "Understanding Smart Pointers",
+      "content": "How do unique_ptr, shared_ptr, and weak_ptr work?",
+      "author": "MemoryManager",
+      "upvotes": 24,
+      "downvotes": 2
+    },
+    {
+      "title": "How to debug C++ code efficiently?",
+      "content": "What are the best tools and techniques for debugging C++ programs?",
+      "author": "BugHunter",
+      "upvotes": 26,
+      "downvotes": 1
+    },
+    {
+      "title": "Why use C++ instead of C?",
+      "content": "What are the main advantages of C++ over C?",
+      "author": "CPlusPlusFan",
+      "upvotes": 17,
+      "downvotes": 3
+    },
+    {
+      "title": "Common Mistakes in C++",
+      "content": "What are some common mistakes beginners make in C++?",
+      "author": "ErrorFinder",
+      "upvotes": 23,
+      "downvotes": 5
+    },
+    {
+      "title": "How to optimize C++ code?",
+      "content": "What are some optimization techniques for C++ programs?",
+      "author": "PerfTuner",
+      "upvotes": 27,
+      "downvotes": 2
+    },
+    {
+      "title": "Best books to learn C++",
+      "content": "Can someone recommend the best books for mastering C++?",
+      "author": "BookLover",
+      "upvotes": 20,
+      "downvotes": 1
+    },
+    {
+      "title": "How to implement design patterns in C++?",
+      "content": "Which design patterns are most useful in C++ projects?",
+      "author": "PatternSeeker",
+      "upvotes": 21,
+      "downvotes": 4
+    },
+    {
+      "title": "Using Lambda Functions in C++",
+      "content": "How do lambda functions work in C++?",
+      "author": "LambdaLover",
+      "upvotes": 14,
+      "downvotes": 2
+    },
+    {
+      "title": "How does move semantics work?",
+      "content": "Can someone explain move constructors and move assignment operators?",
+      "author": "MoveMaster",
+      "upvotes": 28,
+      "downvotes": 1
+    },
+    {
+      "title": "Using Templates in C++",
+      "content": "How do templates work and why are they useful?",
+      "author": "TemplateGuru",
+      "upvotes": 22,
+      "downvotes": 2
+    },
+    {
+      "title": "Best practices for exception handling",
+      "content": "How should I properly handle exceptions in C++?",
+      "author": "ErrorHandler",
+      "upvotes": 16,
+      "downvotes": 3
+    },
+    {
+      "title": "What is RAII in C++?",
+      "content": "Can someone explain Resource Acquisition Is Initialization (RAII)?",
+      "author": "ResourceMaster",
+      "upvotes": 24,
+      "downvotes": 1
+    }
+  ]
+  

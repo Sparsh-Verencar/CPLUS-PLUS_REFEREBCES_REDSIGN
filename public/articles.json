@@ -1,0 +1,38 @@
+[
+    {
+      "title": "Understanding Pointers in C++",
+      "author": "John Doe",
+      "content": "Pointers are a crucial part of C++ that allow direct memory manipulation. This article explores how pointers work, common pitfalls, and best practices.",
+      "upvotes": 35,
+      "downvotes": 3
+    },
+    {
+      "title": "Object-Oriented Programming in C++",
+      "author": "Jane Smith",
+      "content": "C++ supports object-oriented programming (OOP), which helps in creating reusable and maintainable code. Learn about classes, objects, and inheritance in this article.",
+      "upvotes": 42,
+      "downvotes": 5
+    },
+    {
+      "title": "Memory Management in C++",
+      "author": "Alice Johnson",
+      "content": "Managing memory efficiently is key to writing robust C++ applications. This article covers stack vs heap memory, new/delete, and smart pointers.",
+      "upvotes": 50,
+      "downvotes": 2
+    },
+    {
+      "title": "Multithreading in C++",
+      "author": "Bob Williams",
+      "content": "Modern C++ provides excellent support for multithreading using the threading library. Learn how to create threads, use mutexes, and avoid race conditions.",
+      "upvotes": 38,
+      "downvotes": 6
+    },
+    {
+      "title": "Best Practices for Exception Handling in C++",
+      "author": "Charlie Brown",
+      "content": "Exception handling in C++ allows developers to write robust error-handling code. Learn the best practices for using try, catch, and throw effectively.",
+      "upvotes": 29,
+      "downvotes": 4
+    }
+  ]
+  
