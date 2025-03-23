@@ -1,99 +1,122 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const Others = () => {
-  return (
-    <div className="p-8 bg-gradient-to-t from-gray-900 to-slate-700">
-      <h1 className="text-4xl font-bold mb-6">Miscellaneous Headers in C++ Standard Library</h1>
-      <p className="mb-4">
-        The C++ Standard Library includes a variety of headers that provide functionality for tasks such as handling exceptions, working with strings, managing memory, and more. These headers are essential for building robust and efficient C++ applications.
-      </p>
+  const fadeInVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeInOut' } },
+  };
 
-      <h2 className="text-2xl font-bold mt-8 mb-4">Headers</h2>
-      <p className="mb-4">
+  const tableRowVariants = {
+    hover: { scale: 1.02, backgroundColor: '#374151', transition: { duration: 0.2 } },
+  };
+
+  return (
+    <motion.div
+      className="p-4 md:p-8 bg-gradient-to-t from-gray-900 to-slate-700"
+      initial="hidden"
+      animate="visible"
+      variants={fadeInVariants}
+    >
+      <motion.h1
+        className="text-3xl md:text-4xl font-bold mb-4 md:mb-6"
+        variants={fadeInVariants}
+      >
+        Miscellaneous Headers in C++ Standard Library
+      </motion.h1>
+
+      <motion.p
+        className="mb-4 text-sm md:text-base"
+        variants={fadeInVariants}
+      >
+        The C++ Standard Library includes a variety of headers that provide functionality for tasks such as handling exceptions, working with strings, managing memory, and more. These headers are essential for building robust and efficient C++ applications.
+      </motion.p>
+
+      <motion.h2
+        className="text-2xl md:text-2xl font-bold mt-6 md:mt-8 mb-4"
+        variants={fadeInVariants}
+      >
+        Headers
+      </motion.h2>
+      <motion.p
+        className="mb-4 text-sm md:text-base"
+        variants={fadeInVariants}
+      >
         Below is a list of miscellaneous headers in the C++ Standard Library:
-      </p>
-      <div className="overflow-x-auto mb-6">
+      </motion.p>
+
+      <motion.div
+        className="overflow-x-auto mb-6"
+        variants={fadeInVariants}
+      >
         <table className="min-w-full bg-gradient-to-t from-gray-900 to-slate-700 border border-gray-300">
           <thead>
             <tr className="bg-gradient-to-t from-gray-900 to-slate-700">
-              <th className="px-4 py-2 border">Header</th>
-              <th className="px-4 py-2 border">Description</th>
+              <th className="px-4 py-2 border text-sm md:text-base">Header</th>
+              <th className="px-4 py-2 border text-sm md:text-base">Description</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td className="px-4 py-2 border"><code>&lt;complex&gt;</code></td>
-              <td className="px-4 py-2 border">Complex numbers library (header)</td>
-            </tr>
-            <tr>
-              <td className="px-4 py-2 border"><code>&lt;exception&gt;</code></td>
-              <td className="px-4 py-2 border">Standard exceptions (header)</td>
-            </tr>
-            <tr>
-              <td className="px-4 py-2 border"><code>&lt;functional&gt;</code></td>
-              <td className="px-4 py-2 border">Function objects (header)</td>
-            </tr>
-            <tr>
-              <td className="px-4 py-2 border"><code>&lt;iterator&gt;</code></td>
-              <td className="px-4 py-2 border">Iterator definitions (header)</td>
-            </tr>
-            <tr>
-              <td className="px-4 py-2 border"><code>&lt;limits&gt;</code></td>
-              <td className="px-4 py-2 border">Numeric limits (header)</td>
-            </tr>
-            <tr>
-              <td className="px-4 py-2 border"><code>&lt;locale&gt;</code></td>
-              <td className="px-4 py-2 border">Localization library (header)</td>
-            </tr>
-            <tr>
-              <td className="px-4 py-2 border"><code>&lt;memory&gt;</code></td>
-              <td className="px-4 py-2 border">Memory elements (header)</td>
-            </tr>
-            <tr>
-              <td className="px-4 py-2 border"><code>&lt;new&gt;</code></td>
-              <td className="px-4 py-2 border">Dynamic memory (header)</td>
-            </tr>
-            <tr>
-              <td className="px-4 py-2 border"><code>&lt;numeric&gt;</code></td>
-              <td className="px-4 py-2 border">Generalized numeric operations (header)</td>
-            </tr>
-            <tr>
-              <td className="px-4 py-2 border"><code>&lt;stdexcept&gt;</code></td>
-              <td className="px-4 py-2 border">Exception classes (header)</td>
-            </tr>
-            <tr>
-              <td className="px-4 py-2 border"><code>&lt;string&gt;</code></td>
-              <td className="px-4 py-2 border">Strings (header)</td>
-            </tr>
-            <tr>
-              <td className="px-4 py-2 border"><code>&lt;typeinfo&gt;</code></td>
-              <td className="px-4 py-2 border">Type information (header)</td>
-            </tr>
-            <tr>
-              <td className="px-4 py-2 border"><code>&lt;utility&gt;</code></td>
-              <td className="px-4 py-2 border">Utility components (header)</td>
-            </tr>
-            <tr>
-              <td className="px-4 py-2 border"><code>&lt;valarray&gt;</code></td>
-              <td className="px-4 py-2 border">Library for arrays of numeric values (header)</td>
-            </tr>
+            {[
+              { header: '<complex>', description: 'Complex numbers library (header)' },
+              { header: '<exception>', description: 'Standard exceptions (header)' },
+              { header: '<functional>', description: 'Function objects (header)' },
+              { header: '<iterator>', description: 'Iterator definitions (header)' },
+              { header: '<limits>', description: 'Numeric limits (header)' },
+              { header: '<locale>', description: 'Localization library (header)' },
+              { header: '<memory>', description: 'Memory elements (header)' },
+              { header: '<new>', description: 'Dynamic memory (header)' },
+              { header: '<numeric>', description: 'Generalized numeric operations (header)' },
+              { header: '<stdexcept>', description: 'Exception classes (header)' },
+              { header: '<string>', description: 'Strings (header)' },
+              { header: '<typeinfo>', description: 'Type information (header)' },
+              { header: '<utility>', description: 'Utility components (header)' },
+              { header: '<valarray>', description: 'Library for arrays of numeric values (header)' },
+            ].map((row, index) => (
+              <motion.tr
+                key={index}
+                className="hover:bg-gray-800"
+                variants={tableRowVariants}
+                whileHover="hover"
+              >
+                <td className="px-4 py-2 border text-sm md:text-base">
+                  <code>{row.header}</code>
+                </td>
+                <td className="px-4 py-2 border text-sm md:text-base">
+                  {row.description}
+                </td>
+              </motion.tr>
+            ))}
           </tbody>
         </table>
-      </div>
+      </motion.div>
 
-      <h2 className="text-2xl font-bold mt-8 mb-4">Examples</h2>
-      <p className="mb-4">
+      <motion.h2
+        className="text-2xl md:text-2xl font-bold mt-6 md:mt-8 mb-4"
+        variants={fadeInVariants}
+      >
+        Examples
+      </motion.h2>
+      <motion.p
+        className="mb-4 text-sm md:text-base"
+        variants={fadeInVariants}
+      >
         Below are some examples of how these headers can be used in C++ programs:
-      </p>
+      </motion.p>
 
-      {/* Example: <complex> */}
-      <h3 className="text-xl font-semibold mt-6 mb-2"><code>&lt;complex&gt;</code></h3>
-      <p className="mb-4">
-        The <code>&lt;complex&gt;</code> header provides support for complex numbers.
-      </p>
-      <pre className="bg-gray-900 text-white p-4 rounded-lg mb-6">
-        <code>
-          {`#include <iostream>
+      <motion.div
+        className="mb-6"
+        variants={fadeInVariants}
+      >
+        <h3 className="text-xl md:text-xl font-semibold mt-4 md:mt-6 mb-2">
+          <code>&lt;complex&gt;</code>
+        </h3>
+        <p className="mb-4 text-sm md:text-base">
+          The <code>&lt;complex&gt;</code> header provides support for complex numbers.
+        </p>
+        <pre className="bg-gray-900 text-white p-4 rounded-lg">
+          <code className="text-sm md:text-base">
+            {`#include <iostream>
 #include <complex>
 
 int main() {
@@ -102,17 +125,23 @@ int main() {
     std::cout << "Imaginary part: " << z.imag() << std::endl;
     return 0;
 }`}
-        </code>
-      </pre>
+          </code>
+        </pre>
+      </motion.div>
 
-      {/* Example: <string> */}
-      <h3 className="text-xl font-semibold mt-6 mb-2"><code>&lt;string&gt;</code></h3>
-      <p className="mb-4">
-        The <code>&lt;string&gt;</code> header provides support for string manipulation.
-      </p>
-      <pre className="bg-gray-900 text-white p-4 rounded-lg mb-6">
-        <code>
-          {`#include <iostream>
+      <motion.div
+        className="mb-6"
+        variants={fadeInVariants}
+      >
+        <h3 className="text-xl md:text-xl font-semibold mt-4 md:mt-6 mb-2">
+          <code>&lt;string&gt;</code>
+        </h3>
+        <p className="mb-4 text-sm md:text-base">
+          The <code>&lt;string&gt;</code> header provides support for string manipulation.
+        </p>
+        <pre className="bg-gray-900 text-white p-4 rounded-lg">
+          <code className="text-sm md:text-base">
+            {`#include <iostream>
 #include <string>
 
 int main() {
@@ -121,17 +150,23 @@ int main() {
     std::cout << "First character: " << str[0] << std::endl;
     return 0;
 }`}
-        </code>
-      </pre>
+          </code>
+        </pre>
+      </motion.div>
 
-      {/* Example: <memory> */}
-      <h3 className="text-xl font-semibold mt-6 mb-2"><code>&lt;memory&gt;</code></h3>
-      <p className="mb-4">
-        The <code>&lt;memory&gt;</code> header provides support for smart pointers.
-      </p>
-      <pre className="bg-gray-900 text-white p-4 rounded-lg mb-6">
-        <code>
-          {`#include <iostream>
+      <motion.div
+        className="mb-6"
+        variants={fadeInVariants}
+      >
+        <h3 className="text-xl md:text-xl font-semibold mt-4 md:mt-6 mb-2">
+          <code>&lt;memory&gt;</code>
+        </h3>
+        <p className="mb-4 text-sm md:text-base">
+          The <code>&lt;memory&gt;</code> header provides support for smart pointers.
+        </p>
+        <pre className="bg-gray-900 text-white p-4 rounded-lg">
+          <code className="text-sm md:text-base">
+            {`#include <iostream>
 #include <memory>
 
 int main() {
@@ -139,9 +174,10 @@ int main() {
     std::cout << "Value: " << *ptr << std::endl;
     return 0;
 }`}
-        </code>
-      </pre>
-    </div>
+          </code>
+        </pre>
+      </motion.div>
+    </motion.div>
   );
 };
 

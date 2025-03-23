@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import { useUser } from "@clerk/clerk-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Articles() {
   const [posts, setPosts] = useState([]);
   const [newPost, setNewPost] = useState({});
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedPost, setSelectedPost] = useState(null); 
+  const [selectedTag, setSelectedTag] = useState("");
   const { isSignedIn, user } = useUser();
 
   useEffect(() => {
@@ -14,6 +17,7 @@ export default function Articles() {
         setPosts(
           data.map((post) => ({
             ...post,
+            tags: post.tags || [], 
             upvotes: post.upvotes || 0,
             downvotes: post.downvotes || 0,
             upvotedBy: post.upvotedBy || [],
@@ -36,7 +40,8 @@ export default function Articles() {
         {
           id: posts.length + 1,
           ...newPost,
-          author: user.fullName || "Anonymous", // Add the author's name
+          author: user.fullName || "Anonymous",
+          tags: newPost.tags ? newPost.tags.split(",") : [], 
           upvotes: 0,
           downvotes: 0,
           upvotedBy: [],
@@ -58,20 +63,17 @@ export default function Articles() {
         if (post.id === postId) {
           const userId = user.id;
 
-          // Check if the user has already upvoted or downvoted
           const hasUpvoted = post.upvotedBy.includes(userId);
           const hasDownvoted = post.downvotedBy.includes(userId);
 
           if (type === "upvote") {
             if (hasUpvoted) {
-              // Remove upvote
               return {
                 ...post,
                 upvotes: post.upvotes - 1,
                 upvotedBy: post.upvotedBy.filter((id) => id !== userId),
               };
             } else {
-              // Add upvote and remove downvote if exists
               return {
                 ...post,
                 upvotes: post.upvotes + 1,
@@ -82,14 +84,12 @@ export default function Articles() {
             }
           } else if (type === "downvote") {
             if (hasDownvoted) {
-              // Remove downvote
               return {
                 ...post,
                 downvotes: post.downvotes - 1,
                 downvotedBy: post.downvotedBy.filter((id) => id !== userId),
               };
             } else {
-              // Add downvote and remove upvote if exists
               return {
                 ...post,
                 downvotes: post.downvotes + 1,
@@ -105,9 +105,24 @@ export default function Articles() {
     );
   };
 
-  const filteredPosts = posts.filter((post) =>
-    post.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredPosts = posts.filter((post) => {
+    const matchesSearch = post.title.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesTag = selectedTag ? post.tags.includes(selectedTag) : true;
+    return matchesSearch && matchesTag;
+  });
+
+  const fadeInVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+    hover: { scale: 1.05, transition: { duration: 0.2 } },
+  };
+
+  const modalVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: { opacity: 1, scale: 1, transition: { duration: 0.3 } },
+  };
+
+  const allTags = [...new Set(posts.flatMap((post) => post.tags))];
 
   return (
     <>
@@ -118,17 +133,50 @@ export default function Articles() {
       >
         <h1 className="text-3xl font-bold mb-4">Articles</h1>
 
-        <input
+        <motion.input
           type="text"
           placeholder="Search posts..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-[50vw] p-2 mb-4 border rounded"
+          className="w-full md:w-[50vw] p-2 mb-4 border rounded"
+          initial="hidden"
+          animate="visible"
+          variants={fadeInVariants}
         />
 
-        {/* Create Post */}
+        <div className="flex flex-wrap gap-2 mb-6">
+          <button
+            onClick={() => setSelectedTag("")}
+            className={`px-4 py-2 rounded-full ${
+              selectedTag === ""
+                ? "bg-blue-500 text-white"
+                : "bg-gray-700 text-gray-300"
+            }`}
+          >
+            All
+          </button>
+          {allTags.map((tag) => (
+            <button
+              key={tag}
+              onClick={() => setSelectedTag(tag)}
+              className={`px-4 py-2 rounded-full ${
+                selectedTag === tag
+                  ? "bg-blue-500 text-white"
+                  : "bg-gray-700 text-gray-300"
+              }`}
+            >
+              {tag}
+            </button>
+          ))}
+        </div>
+
         {isSignedIn && (
-          <div className="mb-6 p-4 border rounded-lg shadow-sm">
+          <motion.div
+            className="mb-6 p-4 border rounded-lg shadow-sm w-full md:w-[50vw] bg-gray-900"
+            initial="hidden"
+            animate="visible"
+            variants={fadeInVariants}
+          >
             <h2 className="text-xl font-semibold mb-2">Post an Article</h2>
             <input
               type="text"
@@ -145,45 +193,137 @@ export default function Articles() {
               onChange={handleInputChange}
               className="w-full p-2 mb-2 border rounded"
             ></textarea>
-            <button
+            <input
+              type="text"
+              name="tags"
+              placeholder="Tags (comma-separated)"
+              value={newPost.tags || ""}
+              onChange={handleInputChange}
+              className="w-full p-2 mb-2 border rounded"
+            />
+            <motion.button
               onClick={addPost}
               className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               Post
-            </button>
-          </div>
+            </motion.button>
+          </motion.div>
         )}
 
-        {/* Display Posts */}
-        <div className="grid grid-cols-12 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
           {filteredPosts.map((post) => (
-            <div
+            <motion.div
               key={post.id}
-              className="w-full h-full p-4 border rounded-lg shadow-sm col-span-6"
+              className="w-full p-4 border rounded-lg shadow-sm cursor-pointer bg-gray-900"
+              initial="hidden"
+              animate="visible"
+              variants={fadeInVariants}
+              whileHover="hover"
+              onClick={() => setSelectedPost(post)} 
             >
               <h2 className="text-xl font-semibold">{post.title}</h2>
-              <p className="text-gray-300">{post.content}</p>
+              <p className="text-gray-300 line-clamp-3">{post.content}</p>
+              <div className="flex flex-wrap gap-2 mt-2">
+                {post.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-2 py-1 bg-gray-700 text-gray-300 rounded-full text-sm"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
               <p className="text-sm text-gray-400 mt-2">
                 Author: {post.author || "Unknown"}
               </p>
               <div className="flex items-center mt-2">
-                <button
-                  onClick={() => handleVote(post.id, "upvote")}
+                <motion.button
+                  onClick={(e) => {
+                    e.stopPropagation(); 
+                    handleVote(post.id, "upvote");
+                  }}
                   className="text-green-500 hover:text-green-600"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
                 >
                   ▲ {post.upvotes}
-                </button>
-                <button
-                  onClick={() => handleVote(post.id, "downvote")}
+                </motion.button>
+                <motion.button
+                  onClick={(e) => {
+                    e.stopPropagation(); 
+                    handleVote(post.id, "downvote");
+                  }}
                   className="text-red-500 hover:text-red-600 ml-2"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
                 >
                   ▼ {post.downvotes}
-                </button>
+                </motion.button>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
+
+      <AnimatePresence>
+        {selectedPost && (
+          <motion.div
+            className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50"
+            onClick={() => setSelectedPost(null)} 
+          >
+            <motion.div
+              className="bg-gray-900 p-6 rounded-lg w-[90vw] max-w-2xl"
+              variants={modalVariants}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              onClick={(e) => e.stopPropagation()} 
+            >
+              <h2 className="text-2xl font-bold mb-4 text-white">{selectedPost.title}</h2>
+              <p className="text-gray-300">{selectedPost.content}</p>
+              <div className="flex flex-wrap gap-2 mt-4">
+                {selectedPost.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-2 py-1 bg-gray-700 text-gray-300 rounded-full text-sm"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <p className="text-sm text-gray-400 mt-4">
+                Author: {selectedPost.author || "Unknown"}
+              </p>
+              <div className="flex items-center mt-4">
+                <motion.button
+                  onClick={(e) => {
+                    e.stopPropagation(); 
+                    handleVote(selectedPost.id, "upvote");
+                  }}
+                  className="text-green-500 hover:text-green-600"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  ▲ {selectedPost.upvotes}
+                </motion.button>
+                <motion.button
+                  onClick={(e) => {
+                    e.stopPropagation(); 
+                    handleVote(selectedPost.id, "downvote");
+                  }}
+                  className="text-red-500 hover:text-red-600 ml-2"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  ▼ {selectedPost.downvotes}
+                </motion.button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

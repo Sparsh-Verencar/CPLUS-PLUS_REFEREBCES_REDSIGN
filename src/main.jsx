@@ -7,12 +7,10 @@ import Landing from './Pages/Landing.jsx'
 import References from './Pages/References.jsx'
 import Articles from './Pages/Articles.jsx'
 import { ClerkProvider } from '@clerk/clerk-react'
-import Loading from './Components/Loading'
 import Layout from './Components/Layout'
 import Tutorial from './Pages/Tutorial.jsx'
 import Forum from './Pages/Forum'
 import Program_Structure from './Pages/Program_Structure'
-import Variables_and_types from './Pages/Variables_and_types'
 import CLibrary from './Pages/CLibrary'
 import Containers from './Pages/Containers'
 import Input_Output from './Pages/Input_Output'
@@ -40,23 +38,23 @@ const router = createBrowserRouter([
         element: <References />,
         children:[
         {
-          path:'refernces/clibrary',
+          path:'references/clibrary',
           element:<CLibrary/>
         },
         {
-          path:'refernces/stl',
+          path:'references/stl',
           element:<Containers/>
         },
         {
-          path:'refernces/iolibrary',
+          path:'references/iolibrary',
           element:<Input_Output/>
         },
         {
-          path:'refernces/multithreading',
+          path:'references/multithreading',
           element:<Multithreading/>
         },
         {
-          path:'refernces/std',
+          path:'references/std',
           element:<Others/>
         },
       ]
@@ -72,10 +70,6 @@ const router = createBrowserRouter([
           {
           path:'tutorial/program_structure',
           element:<Program_Structure/>
-        },
-          {
-          path:'tutorial/variables_and_types',
-          element:<Variables_and_types/>
         }
       ]
 
