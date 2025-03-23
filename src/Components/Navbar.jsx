@@ -16,6 +16,20 @@ const Navbar = () => {
                     type="search"
                     placeholder='Search' />
 
+                <div className="flex justify-between items-center text-white  w-[20vw]">
+                        <Link to={'/references'}>
+                            References
+                        </Link>
+                        <Link to={'/tutorial'}>
+                            Tutorial
+                        </Link>
+                        <Link to={'articles'}>
+                            Articles
+                        </Link>
+                        <Link to={'/forum'}>
+                            Forum
+                        </Link>
+                </div>
 
                 <div className='mx-[1vw]'>
                     <SignedOut>
@@ -29,6 +43,7 @@ const Navbar = () => {
                         </button>
                     </SignedIn>
                 </div>
+                
             </div>
         </>
     )

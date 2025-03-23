@@ -13,6 +13,11 @@ import Tutorial from './Pages/Tutorial.jsx'
 import Forum from './Pages/Forum'
 import Program_Structure from './Pages/Program_Structure'
 import Variables_and_types from './Pages/Variables_and_types'
+import CLibrary from './Pages/CLibrary'
+import Containers from './Pages/Containers'
+import Input_Output from './Pages/Input_Output'
+import Others from './Pages/Others'
+import Multithreading from './Pages/Multithreading'
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 
@@ -33,6 +38,28 @@ const router = createBrowserRouter([
       {
         path: 'references',
         element: <References />,
+        children:[
+        {
+          path:'refernces/clibrary',
+          element:<CLibrary/>
+        },
+        {
+          path:'refernces/stl',
+          element:<Containers/>
+        },
+        {
+          path:'refernces/iolibrary',
+          element:<Input_Output/>
+        },
+        {
+          path:'refernces/multithreading',
+          element:<Multithreading/>
+        },
+        {
+          path:'refernces/std',
+          element:<Others/>
+        },
+      ]
       },
       {
         path: 'articles',
